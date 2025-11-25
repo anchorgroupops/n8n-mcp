@@ -81,7 +81,7 @@ vi.mock('@/mcp/tool-docs', () => ({
         performance: 'Depends on workflow complexity',
         bestPractices: ['Validate before saving', 'Fix errors first'],
         pitfalls: ['Large workflows may take time'],
-        relatedTools: ['validate_node_operation']
+        relatedTools: ['validate_node']
       }
     },
     get_node_essentials: {

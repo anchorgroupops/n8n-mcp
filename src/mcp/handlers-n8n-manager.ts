@@ -1787,8 +1787,8 @@ export async function handleDiagnostic(request: any, context?: InstanceContext):
   }
 
   // Check which tools are available
-  const documentationTools = 14; // Base documentation tools (after v2.25.0 cleanup)
-  const managementTools = apiConfigured ? 17 : 0; // Management tools requiring API (includes n8n_health_check)
+  const documentationTools = 7; // Base documentation tools (after v2.26.0 consolidation)
+  const managementTools = apiConfigured ? 12 : 0; // Management tools requiring API (after v2.26.0 consolidation)
   const totalTools = documentationTools + managementTools;
 
   // Check npm version

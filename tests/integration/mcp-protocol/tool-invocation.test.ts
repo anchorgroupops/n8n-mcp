@@ -151,14 +151,16 @@ describe('MCP Tool Invocation', () => {
   });
 
   describe('Validation Tools', () => {
-    describe('validate_node_operation', () => {
+    // v2.26.0: validate_node_operation consolidated into validate_node with mode parameter
+    describe('validate_node', () => {
       it('should validate valid node configuration', async () => {
-        const response = await client.callTool({ name: 'validate_node_operation', arguments: {
+        const response = await client.callTool({ name: 'validate_node', arguments: {
           nodeType: 'nodes-base.httpRequest',
           config: {
             method: 'GET',
             url: 'https://api.example.com/data'
-          }
+          },
+          mode: 'full'
         }});
 
         const validation = JSON.parse(((response as any).content[0]).text);
@@ -168,12 +170,13 @@ describe('MCP Tool Invocation', () => {
       });
 
       it('should detect missing required fields', async () => {
-        const response = await client.callTool({ name: 'validate_node_operation', arguments: {
+        const response = await client.callTool({ name: 'validate_node', arguments: {
           nodeType: 'nodes-base.httpRequest',
           config: {
             method: 'GET'
             // Missing required 'url' field
-          }
+          },
+          mode: 'full'
         }});
 
         const validation = JSON.parse(((response as any).content[0]).text);
@@ -184,11 +187,12 @@ describe('MCP Tool Invocation', () => {
 
       it('should support different validation profiles', async () => {
         const profiles = ['minimal', 'runtime', 'ai-friendly', 'strict'];
-        
+
         for (const profile of profiles) {
-          const response = await client.callTool({ name: 'validate_node_operation', arguments: {
+          const response = await client.callTool({ name: 'validate_node', arguments: {
             nodeType: 'nodes-base.httpRequest',
             config: { method: 'GET', url: 'https://api.example.com' },
+            mode: 'full',
             profile
           }});
 

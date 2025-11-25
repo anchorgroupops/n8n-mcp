@@ -217,13 +217,14 @@ describe('MCP Protocol Compliance', () => {
 
   describe('Protocol Extensions', () => {
     it('should handle tool-specific extensions', async () => {
-      // Test tool with complex params
-      const response = await client.callTool({ name: 'validate_node_operation', arguments: {
+      // Test tool with complex params (using consolidated validate_node from v2.26.0)
+      const response = await client.callTool({ name: 'validate_node', arguments: {
         nodeType: 'nodes-base.httpRequest',
         config: {
           method: 'GET',
           url: 'https://api.example.com'
         },
+        mode: 'full',
         profile: 'runtime'
       } });
 

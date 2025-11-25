@@ -135,11 +135,13 @@ describe('MCP Error Handling', () => {
     });
 
     describe('Validation Errors', () => {
+      // v2.26.0: validate_node_operation consolidated into validate_node
       it('should handle invalid validation profile', async () => {
         try {
-          await client.callTool({ name: 'validate_node_operation', arguments: {
+          await client.callTool({ name: 'validate_node', arguments: {
             nodeType: 'nodes-base.httpRequest',
             config: { method: 'GET', url: 'https://api.example.com' },
+            mode: 'full',
             profile: 'invalid_profile' as any
           } });
           expect.fail('Should have thrown an error');
@@ -292,12 +294,14 @@ describe('MCP Error Handling', () => {
   });
 
   describe('Invalid JSON Handling', () => {
+    // v2.26.0: validate_node_operation consolidated into validate_node
     it('should handle invalid JSON in tool parameters', async () => {
       try {
         // Config should be an object, not a string
-        await client.callTool({ name: 'validate_node_operation', arguments: {
+        await client.callTool({ name: 'validate_node', arguments: {
           nodeType: 'nodes-base.httpRequest',
-          config: 'invalid json string' as any
+          config: 'invalid json string' as any,
+          mode: 'full'
         } });
         expect.fail('Should have thrown an error');
       } catch (error: any) {
@@ -509,13 +513,15 @@ describe('MCP Error Handling', () => {
       }
     });
 
+    // v2.26.0: validate_node_operation consolidated into validate_node
     it('should provide context for validation errors', async () => {
-      const response = await client.callTool({ name: 'validate_node_operation', arguments: {
+      const response = await client.callTool({ name: 'validate_node', arguments: {
         nodeType: 'nodes-base.httpRequest',
         config: {
           // Missing required fields
           method: 'INVALID_METHOD'
-        }
+        },
+        mode: 'full'
       } });
 
       const validation = JSON.parse((response as any).content[0].text);
