@@ -1,39 +1,8 @@
 window.BENCHMARK_DATA = {
-  "lastUpdate": 1764115140667,
+  "lastUpdate": 1764184762244,
   "repoUrl": "https://github.com/czlonkowski/n8n-mcp",
   "entries": {
     "n8n-mcp Benchmarks": [
-      {
-        "commit": {
-          "author": {
-            "email": "56956555+czlonkowski@users.noreply.github.com",
-            "name": "Romuald Członkowski",
-            "username": "czlonkowski"
-          },
-          "committer": {
-            "email": "noreply@github.com",
-            "name": "GitHub",
-            "username": "web-flow"
-          },
-          "distinct": true,
-          "id": "43998992551a392828118b1575bbf4b2d552d821",
-          "message": "chore: update n8n to 1.115.2 and bump version to 2.18.11 (#323)\n\n- Updated n8n to ^1.115.2 (from ^1.114.3)\n- Updated n8n-core to ^1.114.0 (from ^1.113.1)\n- Updated n8n-workflow to ^1.112.0 (from ^1.111.0)\n- Updated @n8n/n8n-nodes-langchain to ^1.114.1 (from ^1.113.1)\n- Rebuilt node database with 537 nodes (increased from 525)\n- All 1,181 functional tests passing (1 flaky performance test)\n- All validation tests passing\n- Built and ready for deployment\n- Updated README n8n version badge\n- Updated CHANGELOG.md\n\n🤖 Generated with [Claude Code](https://claude.ai/code)\n\nCo-authored-by: Claude <noreply@anthropic.com>",
-          "timestamp": "2025-10-14T11:08:25+02:00",
-          "tree_id": "643e7d5e303f30278e8ed0f47936599f4f0ea291",
-          "url": "https://github.com/czlonkowski/n8n-mcp/commit/43998992551a392828118b1575bbf4b2d552d821"
-        },
-        "date": 1760433019804,
-        "tool": "customSmallerIsBetter",
-        "benches": [
-          {
-            "name": "sample - array sorting - small",
-            "value": 0.0136,
-            "range": "0.3096",
-            "unit": "ms",
-            "extra": "73341 ops/sec"
-          }
-        ]
-      },
       {
         "commit": {
           "author": {
@@ -1542,6 +1511,37 @@ window.BENCHMARK_DATA = {
           "url": "https://github.com/czlonkowski/n8n-mcp/commit/25784142fe12ebaebde961f3488577311755cd05"
         },
         "date": 1764115140293,
+        "tool": "customSmallerIsBetter",
+        "benches": [
+          {
+            "name": "sample - array sorting - small",
+            "value": 0.0136,
+            "range": "0.3096",
+            "unit": "ms",
+            "extra": "73341 ops/sec"
+          }
+        ]
+      },
+      {
+        "commit": {
+          "author": {
+            "email": "56956555+czlonkowski@users.noreply.github.com",
+            "name": "Romuald Członkowski",
+            "username": "czlonkowski"
+          },
+          "committer": {
+            "email": "noreply@github.com",
+            "name": "GitHub",
+            "username": "web-flow"
+          },
+          "distinct": true,
+          "id": "bac4936c6d4b1c5675a893f18ba3ffcd2e58dc08",
+          "message": "fix: add n8n 1.121 availableInMCP and callerPolicy settings support (v2.26.4) (#445)\n\n* fix: add n8n 1.121 availableInMCP and callerPolicy settings support (v2.26.4)\n\nn8n 1.121 introduced a new workflow setting `availableInMCP` (boolean)\nthat controls whether a workflow is \"Available in MCP\". The sanitization\nwhitelist was missing this field, causing it to be silently stripped\nduring workflow updates.\n\nChanges:\n- Added `availableInMCP` to Zod schema in workflowSettingsSchema\n- Added `availableInMCP` and `callerPolicy` to safeSettingsProperties whitelist\n- Both settings are now preserved during workflow updates\n- Settings can be toggled via updateSettings operation\n\n🤖 Generated with [Claude Code](https://claude.com/claude-code)\n\nCo-Authored-By: Claude <noreply@anthropic.com>\nConceived by Romuald Członkowski - www.aiadvisors.pl/en\n\n* test: update tests for callerPolicy and availableInMCP whitelist changes\n\nUpdated 5 tests in n8n-validation.test.ts that expected callerPolicy\nto be filtered out. Since callerPolicy and availableInMCP are now\nwhitelisted (n8n 1.121+), the tests now verify these settings are\npreserved during workflow updates.\n\n🤖 Generated with [Claude Code](https://claude.com/claude-code)\n\nCo-Authored-By: Claude <noreply@anthropic.com>\n\n---------\n\nCo-authored-by: Claude <noreply@anthropic.com>",
+          "timestamp": "2025-11-26T20:17:34+01:00",
+          "tree_id": "212b8cc8337c320b7564f184f2f686f1fd60557a",
+          "url": "https://github.com/czlonkowski/n8n-mcp/commit/bac4936c6d4b1c5675a893f18ba3ffcd2e58dc08"
+        },
+        "date": 1764184761981,
         "tool": "customSmallerIsBetter",
         "benches": [
           {
