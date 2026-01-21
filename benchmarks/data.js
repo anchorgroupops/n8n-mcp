@@ -1,39 +1,8 @@
 window.BENCHMARK_DATA = {
-  "lastUpdate": 1768991083681,
+  "lastUpdate": 1769000307114,
   "repoUrl": "https://github.com/czlonkowski/n8n-mcp",
   "entries": {
     "n8n-mcp Benchmarks": [
-      {
-        "commit": {
-          "author": {
-            "email": "56956555+czlonkowski@users.noreply.github.com",
-            "name": "Romuald Członkowski",
-            "username": "czlonkowski"
-          },
-          "committer": {
-            "email": "noreply@github.com",
-            "name": "GitHub",
-            "username": "web-flow"
-          },
-          "distinct": true,
-          "id": "47d9f55dc55b600b953d885bad2dba729f5baecc",
-          "message": "chore: update n8n to 1.120.3 and bump version to 2.22.20 (#430)\n\n- Updated n8n from 1.119.1 to 1.120.3\n- Updated n8n-core from 1.118.0 to 1.119.2\n- Updated n8n-workflow from 1.116.0 to 1.117.0\n- Updated @n8n/n8n-nodes-langchain from 1.118.0 to 1.119.1\n- Rebuilt node database with 544 nodes (439 from n8n-nodes-base, 105 from @n8n/n8n-nodes-langchain)\n- Updated README badge with new n8n version\n- Updated CHANGELOG with dependency changes\n\nConceived by Romuald Członkowski - https://www.aiadvisors.pl/en\n\n🤖 Generated with [Claude Code](https://claude.com/claude-code)\n\nCo-authored-by: Claude <noreply@anthropic.com>",
-          "timestamp": "2025-11-19T11:31:51+01:00",
-          "tree_id": "89d14ead67bd7b1f340ea82e53fef8e96c82beec",
-          "url": "https://github.com/czlonkowski/n8n-mcp/commit/47d9f55dc55b600b953d885bad2dba729f5baecc"
-        },
-        "date": 1763548440457,
-        "tool": "customSmallerIsBetter",
-        "benches": [
-          {
-            "name": "sample - array sorting - small",
-            "value": 0.0136,
-            "range": "0.3096",
-            "unit": "ms",
-            "extra": "73341 ops/sec"
-          }
-        ]
-      },
       {
         "commit": {
           "author": {
@@ -1530,6 +1499,37 @@ window.BENCHMARK_DATA = {
           "url": "https://github.com/czlonkowski/n8n-mcp/commit/0f15b82f1e5496b7b0f88910a9f61c152ceeb327"
         },
         "date": 1768991083028,
+        "tool": "customSmallerIsBetter",
+        "benches": [
+          {
+            "name": "sample - array sorting - small",
+            "value": 0.0136,
+            "range": "0.3096",
+            "unit": "ms",
+            "extra": "73341 ops/sec"
+          }
+        ]
+      },
+      {
+        "commit": {
+          "author": {
+            "email": "56956555+czlonkowski@users.noreply.github.com",
+            "name": "Romuald Członkowski",
+            "username": "czlonkowski"
+          },
+          "committer": {
+            "email": "noreply@github.com",
+            "name": "GitHub",
+            "username": "web-flow"
+          },
+          "distinct": true,
+          "id": "fad343797719f96c33417ef32b54fe4107d51581",
+          "message": "fix: memory leak in SSE session reset (#542) (#544)\n\nWhen SSE sessions are recreated every 5 minutes, the old session's MCP\nserver was not being closed, causing:\n- SimpleCache cleanup timer continuing to run indefinitely\n- Database connections remaining open\n- Cached data (~50-100MB per session) persisting in memory\n\nAdded server.close() call before transport.close() in resetSessionSSE(),\nmirroring the existing cleanup pattern in removeSession().\n\nFixes #542\n\nConceived by Romuald Członkowski - https://www.aiadvisors.pl/en\n\nCo-authored-by: Claude Opus 4.5 <noreply@anthropic.com>",
+          "timestamp": "2026-01-21T13:56:16+01:00",
+          "tree_id": "a7886bb6cbe8230ac4306a4c4993459b90d6a5db",
+          "url": "https://github.com/czlonkowski/n8n-mcp/commit/fad343797719f96c33417ef32b54fe4107d51581"
+        },
+        "date": 1769000306810,
         "tool": "customSmallerIsBetter",
         "benches": [
           {
