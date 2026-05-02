@@ -198,7 +198,7 @@ function validateDatabase(repository: NodeRepository): { passed: boolean; issues
     // CRITICAL: Check if database has any nodes at all
     const nodeCount = db.prepare('SELECT COUNT(*) as count FROM nodes').get() as { count: number };
     if (nodeCount.count === 0) {
-      issues.push('CRITICAL: Database is empty - no nodes found! Rebuild failed or was interrupted.');
+      issues.push('CRITICAL: Database is empty - no nodes found! Rebuild failed or was interrupted. Run: npm run rebuild');
       return { passed: false, issues };
     }
 
@@ -244,15 +244,15 @@ function validateDatabase(repository: NodeRepository): { passed: boolean; issues
     `).get();
 
     if (!ftsTableCheck) {
-      issues.push('CRITICAL: FTS5 table (nodes_fts) does not exist - searches will fail or be very slow');
+      issues.push('CRITICAL: FTS5 table (nodes_fts) does not exist - searches will fail or be very slow. Run: npm run rebuild');
     } else {
       // Check if FTS5 table is properly populated
       const ftsCount = db.prepare('SELECT COUNT(*) as count FROM nodes_fts').get() as { count: number };
 
       if (ftsCount.count === 0) {
-        issues.push('CRITICAL: FTS5 index is empty - searches will return zero results');
+        issues.push('CRITICAL: FTS5 index is empty - searches will return zero results. Run: npm run rebuild');
       } else if (nodeCount.count !== ftsCount.count) {
-        issues.push(`FTS5 index out of sync: ${nodeCount.count} nodes but ${ftsCount.count} FTS5 entries`);
+        issues.push(`FTS5 index out of sync: ${nodeCount.count} nodes but ${ftsCount.count} FTS5 entries. Run: npm run rebuild`);
       }
 
       // Verify critical nodes are searchable via FTS5
@@ -264,7 +264,7 @@ function validateDatabase(repository: NodeRepository): { passed: boolean; issues
         `).get(searchTerm);
 
         if (searchResult.count === 0) {
-          issues.push(`CRITICAL: Search for "${searchTerm}" returns zero results in FTS5 index`);
+          issues.push(`CRITICAL: Search for "${searchTerm}" returns zero results in FTS5 index. Run: npm run rebuild`);
         }
       }
     }
